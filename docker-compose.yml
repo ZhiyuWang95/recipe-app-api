@@ -1,0 +1,16 @@
+#docker compose version
+version: "3"
+
+#services, called app, build: context to be current directory.
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    #volume achieves that uploading the code changes to docker image in no time, so you don't need to restart docker to update your changes
+    volumes:
+      - ./app:/app
+    #use to run app in docker
+    command: >
+      sh -C "python manage.py runserver 0.0.0.0:8000"
